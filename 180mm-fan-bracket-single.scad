@@ -4,7 +4,7 @@ window_width = 145;
 bracket_overflow = 10;
 bracket_width = (window_width + (2*bracket_overflow));
 bracket_depth = 10;
-bracket_height = 20;
+bracket_height = 10;
 
 
 arm_width = 10;
@@ -32,3 +32,6 @@ translate([bracket_overflow, finger_y_offset, arm_height]) cube([arm_width, fing
 
 // arm 2
 translate([arm2_x_offset, bracket_depth, 0]) cube([arm_width, arm_depth, arm_height]);
+
+// finger 2
+translate([arm2_x_offset, finger_y_offset, arm_height]) cube([arm_width, finger_depth, finger_height]);
