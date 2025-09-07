@@ -1,9 +1,9 @@
 
-total_height = 10;
-radius = 2;
+total_height =15;
+radius = 4;
 teeth_slope = 1.2;
 tooth_height = 1;
-facet_number = 50;
+facet_number = 100;
 
 
 radius_wide = radius;
