@@ -1,8 +1,11 @@
 source_d = 180;
-target_d = 120;
-center_offset = (source_d - target_d)/2 - 9.5;
+target_d = 140;
 
-core_h = 1;
+window_width = 145;
+window_right_gap = 9.5;
+center_offset = (source_d - window_width)/2 - window_right_gap;
+
+core_h = 5;
 
 adapter_thickness = 2;
 
@@ -33,6 +36,8 @@ difference() {
         cylinder(h = source_through_h, d = screw_hole_d);
     }
 
+
+
     // Source Screw hole 2
     translate([source_d - 7.5, 7.5, 0]) {
         cylinder(h = source_through_h, d = screw_hole_d);
@@ -44,7 +49,7 @@ difference() {
     }
 
 
-    // Source Screw hole 3
+    // Source Screw hole 4
     translate([7.5, source_d - 7.5, 0]) {
         cylinder(h = source_through_h, d = screw_hole_d);
     }
@@ -68,9 +73,32 @@ difference() {
     translate([adapter_x_offset + target_d - 7.5, source_d - 7.5/2, 0]) {
         cylinder(h = source_through_h, d = screw_hole_d);
     }
+
+    // Source Screwhole Countersinks
+    counter_sink_h = 2;
+    translate([7.5, 7.5, source_through_h - counter_sink_h]) {
+        cylinder(h = counter_sink_h, d = 7);
+    }
+    translate([source_d - 7.5, 7.5, source_through_h - counter_sink_h]) {
+        cylinder(h = counter_sink_h, d = 7);
+    }
+    translate([source_d - 7.5, source_d - 7.5, source_through_h - counter_sink_h]) {
+        cylinder(h = counter_sink_h, d = 7);
+    }
+    translate([7.5, source_d - 7.5, source_through_h - counter_sink_h]) {
+        cylinder(h = counter_sink_h, d = 7);
+    }
 }
 
-// // Adapter extend
+lip_h = 2;
+translate([source_d/2, source_d/2, 0]) {
+    difference() {
+        cylinder(h = source_through_h, r = (source_d/2));
+        cylinder(h = source_through_h, r1= (source_d/2),r2 = (source_d/2) - 3);
+    }
+} 
+
+// // // Adapter extend
 // adapter_d = 7.5;
 // translate([0,0,source_through_h]) {
 //     difference() {
