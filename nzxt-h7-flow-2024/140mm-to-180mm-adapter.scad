@@ -12,7 +12,6 @@ screw_hole_d = 4;
 
 source_through_h = core_h;
 
-
 $fn = 100;
 
 lip_h = 4;
@@ -21,7 +20,7 @@ lip_thickness = 5;
 
 lip_d = source_d + lip_padding;
 
-target_screwhole_lip_h = lip_h + 2;
+target_screwhole_lip_h = lip_h;
 target_screwhole_lip_thickness = 5;
 
 center_offset = (lip_d - window_width)/2 - window_right_gap;
@@ -37,30 +36,30 @@ difference() {
         }
 
         // Target Screw lip hole 1
-        translate([adapter_x_offset + 7.5, 7.5 / 2, source_through_h]) {
-            cylinder(h = source_through_h, d = screw_hole_d + target_screwhole_lip_thickness);
+        translate([adapter_x_offset + 7.5, 7.5 / 2, 0]) {
+            cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
         // Target Screw lip hole 2
-        translate([adapter_x_offset + target_d - 7.5, 7.5 / 2, source_through_h]) {
-            cylinder(h = source_through_h, d = screw_hole_d + target_screwhole_lip_thickness);
+        translate([adapter_x_offset + target_d - 7.5, 7.5 / 2, 0]) {
+            cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         } 
 
         // Target Screw lip hole 3
-        translate([adapter_x_offset + 7.5, source_d - 7.5/2, source_through_h]) {
-            cylinder(h = source_through_h, d = screw_hole_d + target_screwhole_lip_thickness);
+        translate([adapter_x_offset + 7.5, source_d - 7.5/2, 0]) {
+            cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
         // Target Screw lip hole 4
-        translate([adapter_x_offset + target_d - 7.5, source_d - 7.5/2, source_through_h]) {
-            cylinder(h = source_through_h, d = screw_hole_d + target_screwhole_lip_thickness);
+        translate([adapter_x_offset + target_d - 7.5, source_d - 7.5/2, 0]) {
+            cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
     }
     
     // Fan hole
-    translate([source_d/2, source_d/2, -lip_h]) {
-        cylinder(h = source_through_h + lip_h - 1, d = source_d);
+    #translate([source_d/2, source_d/2, 0]) {
+        cylinder(h = source_through_h - 1, r1 = source_d/2, r2 = source_d/2 - 3);
     }
 
     // Lip hole
