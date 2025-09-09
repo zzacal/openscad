@@ -11,17 +11,18 @@ adapter_thickness = 2;
 
 screw_hole_d = 4;
 
-mink_r = 1;
+mink_r = 5;
 
 source_through_h = core_h + mink_r * 2;
 
 adapter_x_offset = center_offset + (source_d - target_d) / 2;
 
+$fn = source_d / 2;
 
 difference() {
     translate([0,0,mink_r]) {
         minkowski() {
-            sphere(r = mink_rad);
+            sphere(r = mink_r);
             cube([source_d, source_d, core_h]);
         }
     } 
@@ -76,17 +77,18 @@ difference() {
 
     // Source Screwhole Countersinks
     counter_sink_h = 2;
+    counter_sink_r = 4;
     translate([7.5, 7.5, source_through_h - counter_sink_h]) {
-        cylinder(h = counter_sink_h, d = 7);
+        cylinder(h = counter_sink_h, r = counter_sink_r);
     }
     translate([source_d - 7.5, 7.5, source_through_h - counter_sink_h]) {
-        cylinder(h = counter_sink_h, d = 7);
+        cylinder(h = counter_sink_h, r = counter_sink_r);
     }
     translate([source_d - 7.5, source_d - 7.5, source_through_h - counter_sink_h]) {
-        cylinder(h = counter_sink_h, d = 7);
+        cylinder(h = counter_sink_h, r = counter_sink_r);
     }
     translate([7.5, source_d - 7.5, source_through_h - counter_sink_h]) {
-        cylinder(h = counter_sink_h, d = 7);
+        cylinder(h = counter_sink_h, r = counter_sink_r);
     }
 }
 
