@@ -20,7 +20,8 @@ lip_thickness = 5;
 
 lip_d = source_d + lip_padding;
 
-target_screwhole_lip_h = lip_h;
+target_screwhole__to_mount_h = 2;
+target_screwhole_lip_h = lip_h + target_screwhole__to_mount_h;
 target_screwhole_lip_thickness = 5;
 
 center_offset = (lip_d - window_width)/2 - window_right_gap;
