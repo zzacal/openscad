@@ -5,7 +5,7 @@ window_width = 145;
 window_right_gap = 9.5;
 center_offset = (source_d - window_width)/2 - window_right_gap;
 
-core_h = 4;
+core_h = 5;
 
 adapter_thickness = 2;
 
@@ -17,18 +17,25 @@ adapter_x_offset = center_offset + (source_d - target_d) / 2;
 
 $fn = 100;
 
-lip_h = 2;
+lip_h = 4;
+lip_padding = 4;
+lip_thickness = 5;
 difference() {
     union() {
         cube([source_d, source_d, core_h]);
         translate([source_d/2, source_d/2,0]) {
-            cylinder(h = source_through_h + lip_h, d = source_d + 2);
+            cylinder(h = source_through_h + lip_h, d = source_d + lip_padding);
         }
     }
     
     // Fan hole
-    #translate([source_d/2, source_d/2, -1]) {
-        cylinder(h = source_through_h + lip_h + 2, r = source_d/2);
+    translate([source_d/2, source_d/2, -lip_h]) {
+        cylinder(h = source_through_h + lip_h - 1, d = source_d);
+    }
+
+    // Lip hole
+    translate([source_d/2, source_d/2, source_through_h - 2]) {
+        cylinder(h = lip_h + 3, d = source_d - 5);
     }
 
     // Source Screw hole 1
