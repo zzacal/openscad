@@ -1,8 +1,8 @@
-wrench_h = 20;
-size = 10;
-strength = 5;
+wrench_h = 12;
+size = 12.3;
+strength = 10;
 
-inlet = 10;
+inlet = 15;
 
 inner_rad = size;
 outer_rad = inner_rad + strength;
@@ -14,8 +14,13 @@ difference() {
     translate([0,0,-1]) {
         cylinder(h = wrench_h + 2, r = inner_rad, $fn = 6);
     }
-    translate([0, -(inlet/2), -1 ]) 
-    cube([outer_rad, inlet, wrench_h + 2]);
+    translate([0, -(inlet/2), -1 ]) {
+        cube([outer_rad, inlet, wrench_h + 2]);
+    }
+    for (i = [1 : 7]) {
+        angle = i * 45;
+        translate([outer_rad*cos(angle),outer_rad*sin(angle), -1]) {
+            cylinder(h = wrench_h + 2, r = finger_hold_rad, $fn = 10);
+        }
+    }
 }
-
-cylinder(h = wrench_h, r = finger_hold_rad);
