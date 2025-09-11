@@ -1,13 +1,15 @@
 wrench_h = 12;
-size = 12.3;
+size = 27;
 strength = 10;
 
 inlet = 15;
 
-inner_rad = size;
+inner_rad = size/2;
 outer_rad = inner_rad + strength;
 
 finger_hold_rad = 5;
+
+label = str(size);
 
 difference() {
     cylinder(h = wrench_h, r = outer_rad, $fn = 100);
@@ -23,4 +25,9 @@ difference() {
             cylinder(h = wrench_h + 2, r = finger_hold_rad, $fn = 10);
         }
     }
+}
+
+translate([0,inner_rad,wrench_h]) {
+    linear_extrude(height = 0.4) 
+    text(label, 4, halign = "center");
 }
