@@ -4,7 +4,7 @@ target_d = 140;
 window_width = 145;
 window_right_gap = 9.5;
 
-core_h = 5;
+core_h = 3;
 
 screw_hole_d = 4;
 
@@ -12,27 +12,22 @@ source_through_h = core_h;
 
 $fn = 10;
 
-lip_h = 0;
-lip_padding = 0;
-lip_thickness = 5;
-
-lip_d = source_d + lip_padding;
-
 target_screwhole__to_mount_h = 2;
-target_screwhole_lip_h = lip_h + target_screwhole__to_mount_h;
+target_screwhole_lip_h = target_screwhole__to_mount_h;
 target_screwhole_lip_thickness = 5;
 
-center_offset = (lip_d - window_width)/2 - window_right_gap;
+back_lip_w = 2;
+back_lip_h = 6;
+
+center_offset = (source_d - window_width)/2 - window_right_gap - back_lip_w;
 adapter_x_offset = center_offset + (source_d - target_d) / 2;
+
+counter_sink_h = 2;
+counter_sink_r = 4;
 
 difference() {
     union() {
         cube([source_d, source_d, core_h]);
-
-        // Lip
-        translate([source_d/2, source_d/2,0]) {
-            cylinder(h = source_through_h + lip_h, d = lip_d);
-        }
 
         // Target Screw lip hole 1
         translate([adapter_x_offset + 7.5, 7.5 / 2, 0]) {
@@ -54,6 +49,11 @@ difference() {
             cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
+        // Back lip
+        translate([-back_lip_w,-back_lip_w,-back_lip_h]) 
+        linear_extrude(height = core_h + back_lip_h) {
+            square(size = source_d + back_lip_w * 2);
+        }
     }
     
     // Fan hole
@@ -62,17 +62,31 @@ difference() {
     }
 
     // Corner gaps
-    linear_extrude(height = source_through_h + 2)  {
-        // y-spanning
-        translate([source_d/2-1, source_d/2-1, - 1]) {
-            square([source_d+2, source_d - 40 +2], center=true);
-        }
+    translate([0,0,-back_lip_h-1]) {
+        linear_extrude(height = source_through_h + 2 + back_lip_h)  {
+            // y-spanning
+            translate([source_d/2-1, source_d/2-1,0]) {
+                square([source_d + 2 + back_lip_w * 2, source_d - 40 +2], center=true);
+            }
 
-        // x gap
-        translate([source_d/2-1 + center_offset, source_d/2-1, - 1]) {
-            square([source_d - 70+2, source_d+2], center=true);
+            // x gap
+            translate([source_d/2-1 + center_offset, source_d/2-1,0]) {
+                square([source_d - 70 + 2, source_d + 2 + back_lip_w * 2], center=true);
+            }
         }
     }
+
+    translate([0,0,-back_lip_h]) {
+        linear_extrude(height = back_lip_h) {
+            square(size = source_d);
+        }
+    }
+
+    #translate([7.5 + counter_sink_r + 2, - back_lip_w - 1, 0]) {
+        linear_extrude(height = core_h + 1) {
+            square([15, source_d + back_lip_w * 2 + 2]);
+        }
+    } 
 
     // Source Screw hole 1
     translate([7.5, 7.5, 0]) {
@@ -118,8 +132,6 @@ difference() {
     }
 
     // Source Screwhole Countersinks
-    counter_sink_h = 2;
-    counter_sink_r = 4;
     translate([7.5, 7.5, source_through_h - counter_sink_h]) {
         cylinder(h = counter_sink_h, r = counter_sink_r);
     }
