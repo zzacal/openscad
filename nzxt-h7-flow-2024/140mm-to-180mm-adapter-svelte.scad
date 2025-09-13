@@ -16,8 +16,8 @@ target_screwhole__to_mount_h = 2;
 target_screwhole_lip_h = target_screwhole__to_mount_h;
 target_screwhole_lip_thickness = 5;
 
-back_lip_w = 2;
-back_lip_h = 6;
+back_lip_w = 0;
+back_lip_h = 0;
 
 center_offset = (source_d - window_width)/2 - window_right_gap - back_lip_w;
 adapter_x_offset = center_offset + (source_d - target_d) / 2;
@@ -76,17 +76,11 @@ difference() {
         }
     }
 
-    translate([0,0,-back_lip_h]) {
+    #translate([0,0,-back_lip_h]) {
         linear_extrude(height = back_lip_h) {
             square(size = source_d);
         }
     }
-
-    #translate([7.5 + counter_sink_r + 2, - back_lip_w - 1, 0]) {
-        linear_extrude(height = core_h + 1) {
-            square([15, source_d + back_lip_w * 2 + 2]);
-        }
-    } 
 
     // Source Screw hole 1
     translate([7.5, 7.5, 0]) {
