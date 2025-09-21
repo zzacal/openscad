@@ -1,5 +1,5 @@
 // object constraints
-lip_balm_diameter = 18;
+lip_balm_diameter = 17;
 
 // preferences
 outer_height = 25;
@@ -8,7 +8,7 @@ inner_height = 50;
 inner_thickness = 1;
 lip_balm_holster_diameter = 60;
 inner_rad = 20;
-lipbalm_holster_count = 20;
+lipbalm_holster_count = 10;
 $fn = 100;
 
 
