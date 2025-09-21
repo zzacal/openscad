@@ -1,8 +1,8 @@
 wrench_h = 12;
-size = 27;
+size = 40;
 strength = 10;
 
-inlet = 15;
+inlet = 34.5;
 
 inner_rad = size/2;
 outer_rad = inner_rad + strength;
@@ -18,6 +18,9 @@ difference() {
     }
     translate([0, -(inlet/2), -1 ]) {
         cube([outer_rad, inlet, wrench_h + 2]);
+    }
+    #translate([18, -(inlet/2) - 5, -1 ]) {
+        cube([10, inlet + 10, wrench_h + 2]);
     }
     for (i = [1 : 7]) {
         angle = i * 45;
