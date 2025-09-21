@@ -14,9 +14,8 @@ source_through_h = core_h;
 
 $fn = 100;
 
-lip_h = 4;
-lip_padding = 4;
-lip_thickness = 5;
+lip_h = 5;
+lip_padding = 1;
 
 lip_d = source_d + lip_padding;
 
@@ -37,22 +36,22 @@ difference() {
         }
 
         // Target Screw lip hole 1
-        translate([adapter_x_offset + 7.5, 7.5 / 2, 0]) {
+        translate([adapter_x_offset + 7.5, 7.5, 0]) {
             cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
         // Target Screw lip hole 2
-        translate([adapter_x_offset + target_d - 7.5, 7.5 / 2, 0]) {
+        translate([adapter_x_offset + target_d - 7.5, 7.5, 0]) {
             cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         } 
 
         // Target Screw lip hole 3
-        translate([adapter_x_offset + 7.5, source_d - 7.5/2, 0]) {
+        translate([adapter_x_offset + 7.5, source_d - 7.5, 0]) {
             cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
         // Target Screw lip hole 4
-        translate([adapter_x_offset + target_d - 7.5, source_d - 7.5/2, 0]) {
+        translate([adapter_x_offset + target_d - 7.5, source_d - 7.5, 0]) {
             cylinder(h = source_through_h + target_screwhole_lip_h, d = screw_hole_d + target_screwhole_lip_thickness);
         }
 
@@ -92,22 +91,22 @@ difference() {
     }
 
     // Target Screw hole 1
-    translate([adapter_x_offset + 7.5, 7.5 / 2, 0]) {
+    translate([adapter_x_offset + 7.5, 7.5, 0]) {
         cylinder(h = source_through_h + target_screwhole_lip_h + 1, d = screw_hole_d);
     }
 
     // Target Screw hole 2
-    translate([adapter_x_offset + target_d - 7.5, 7.5 / 2, 0]) {
+    translate([adapter_x_offset + target_d - 7.5, 7.5, 0]) {
         cylinder(h = source_through_h + target_screwhole_lip_h + 1, d = screw_hole_d);
     } 
 
     // Target Screw hole 3
-    translate([adapter_x_offset + 7.5, source_d - 7.5/2, 0]) {
+    translate([adapter_x_offset + 7.5, source_d - 7.5, 0]) {
         cylinder(h = source_through_h + target_screwhole_lip_h + 1, d = screw_hole_d);
     }
 
     // Target Screw hole 4
-    translate([adapter_x_offset + target_d - 7.5, source_d - 7.5/2, 0]) {
+    translate([adapter_x_offset + target_d - 7.5, source_d - 7.5, 0]) {
         cylinder(h = source_through_h + target_screwhole_lip_h + 1, d = screw_hole_d);
     }
 
