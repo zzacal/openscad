@@ -20,11 +20,34 @@ target_plate_outer_radius = 25;
 target_width = target_size;
 target_depth = target_size;
 
+source_plate_outer_radius = 25;
+
+// source plate
+linear_extrude(height = deck_thickness) {
+    difference() {
+        minkowski() {
+            square([source_size - source_plate_outer_radius, source_size - source_plate_outer_radius], center = true);
+            circle(d = source_plate_outer_radius);
+        }
+        circle(d = source_diameter - wall_thickness*2);
+
+        translate(v = [source_diameter/2 - screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0]) {
+            circle(d = screw_hole_diameter);
+        }
+        translate(v = [-source_diameter/2 + screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0]) {
+            circle(d = screw_hole_diameter);
+        }
+        translate(v = [-source_diameter/2 + screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0]) {
+            circle(d = screw_hole_diameter);
+        }
+        translate(v = [source_diameter/2 - screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0]) {
+            circle(d = screw_hole_diameter);
+        }
+    }
+}
+
 difference() {
     union() {
-        linear_extrude(height = deck_thickness) {
-            square([source_size, source_size], center = true);
-        }
         hull() {
             // source
             linear_extrude(height = deck_thickness) {
@@ -55,7 +78,7 @@ difference() {
         translate([x_offset, y_offset, h_offset]) {
             linear_extrude(height = deck_thickness) {
                 minkowski() {
-                    #square([target_width - target_plate_outer_radius - wall_thickness*2, target_depth - target_plate_outer_radius - wall_thickness*2], center = true);
+                    square([target_width - target_plate_outer_radius - wall_thickness*2, target_depth - target_plate_outer_radius - wall_thickness*2], center = true);
                     circle(d = target_plate_outer_radius);
                 }
             }
