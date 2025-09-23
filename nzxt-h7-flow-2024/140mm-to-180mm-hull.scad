@@ -31,17 +31,17 @@ linear_extrude(height = deck_thickness) {
         }
         circle(d = source_diameter - wall_thickness*2);
 
-        translate(v = [source_diameter/2 - screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0]) {
-            circle(d = screw_hole_diameter);
-        }
-        translate(v = [-source_diameter/2 + screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0]) {
-            circle(d = screw_hole_diameter);
-        }
-        translate(v = [-source_diameter/2 + screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0]) {
-            circle(d = screw_hole_diameter);
-        }
-        translate(v = [source_diameter/2 - screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0]) {
-            circle(d = screw_hole_diameter);
+        source_screw_hole_coords = [
+            [source_diameter/2 - screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0],
+            [-source_diameter/2 + screw_hole_corner_offset, source_diameter/2 - screw_hole_corner_offset, 0], 
+            [-source_diameter/2 + screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0],
+            [source_diameter/2 - screw_hole_corner_offset, -source_diameter/2 + screw_hole_corner_offset, 0]
+        ];
+
+        for (i = [0:3]) {
+            translate(v = source_screw_hole_coords[i]) {
+                circle(d = screw_hole_diameter);
+            }
         }
     }
 }
@@ -98,17 +98,18 @@ translate(v = [x_offset, y_offset, h_offset]) {
                 square([target_plate_width, target_plate_depth], center = true);
                 circle(d = target_plate_inner_radius);
             }
-            translate(v = [target_width/2 - screw_hole_corner_offset, target_depth/2 - screw_hole_corner_offset]) {
-                circle(d = screw_hole_diameter);
-            }
-            translate(v = [target_width/2 - screw_hole_corner_offset, -target_depth/2 + screw_hole_corner_offset]) {
-                circle(d = screw_hole_diameter);
-            }
-            translate(v = [-target_width/2 + screw_hole_corner_offset, target_depth/2 - screw_hole_corner_offset]) {
-                circle(d = screw_hole_diameter);
-            }
-            translate(v = [-target_width/2 + screw_hole_corner_offset, -target_depth/2 + screw_hole_corner_offset]) {
-                circle(d = screw_hole_diameter);
+
+            target_screw_hole_coords = [
+                [target_width/2 - screw_hole_corner_offset, target_depth/2 - screw_hole_corner_offset],
+                [target_width/2 - screw_hole_corner_offset, -target_depth/2 + screw_hole_corner_offset],
+                [-target_width/2 + screw_hole_corner_offset, target_depth/2 - screw_hole_corner_offset],
+                [-target_width/2 + screw_hole_corner_offset, -target_depth/2 + screw_hole_corner_offset]
+            ];
+
+            for (i = [0:3]) {
+                translate(v = target_screw_hole_coords[i]) {
+                    circle(d = screw_hole_diameter);
+                }
             }
         }
     }
